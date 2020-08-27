@@ -11,8 +11,9 @@ function setupStates() {
         }
     });
 
-    const backButton = document.getElementById("back-button");
-    backButton.addEventListener("click", startMainMenu);
+    document.querySelector("#gameover .back-button").addEventListener("click", startLevelSelector);
+
+    document.querySelector("#levelSelector .back-button").addEventListener("click", startMainMenu);
 
     const level1Button = document.getElementById("level1");
     level1Button.addEventListener("click", function () {
