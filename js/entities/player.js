@@ -5,16 +5,14 @@ class Player {
             y: posY,
         };
         this.size = {
-            w: 32,
+            w: 16,
             h: 32,
         };
         this.velocity = {
-            x: 5,
+            x: SPEED,
             y: 0,
         };
-        this.color = [200, 50, 50];
-        this.speed = 5;
-        this.gravity = 0.2;
+        this.gravity = GRAVITY;
         this.solid = true;
         this.canJump = true;
         this.img = assets.playerImg;
@@ -23,6 +21,6 @@ class Player {
     }
 
     update() {
-        this.velocity.x = 5;
+        this.velocity.x = SPEED;
     }
 }

@@ -8,7 +8,6 @@ class Block {
             w: 32,
             h: 32,
         };
-        this.color = [255, 0, 0];
         this.solid = true;
         this.img = assets.blockImg;
     }
