@@ -12,7 +12,8 @@ let assets = {
     playerImg: null,
     goalImg: null,
     levelOne: null,
-    levelTwo: null
+    levelTwo: null,
+    levelThree: null
 };
 let dt = 1.0;
 
@@ -20,8 +21,10 @@ function preload() {
     assets.blockImg = loadImage('images/Block.png');
     assets.playerImg = loadImage('images/Player.png');
     assets.goalImg = loadImage('images/Goal.png');    
-    assets.levelOne = loadStrings('level/level1.txt');
+    assets.levelOne = loadStrings('level/level1.txt'); 
     assets.levelTwo = loadStrings('level/level2.txt');
+    assets.levelThree = loadStrings('level/level3.txt');
+
 }
 
 function setup() {

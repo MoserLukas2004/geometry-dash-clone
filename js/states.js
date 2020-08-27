@@ -15,16 +15,19 @@ function setupStates() {
 
     document.querySelector("#levelSelector .back-button").addEventListener("click", startMainMenu);
 
-    const level1Button = document.getElementById("level1");
-    level1Button.addEventListener("click", function () {
+    document.getElementById("level1").addEventListener("click", function () {
         currentLevel = assets.levelOne;
-        startLevel(assets.levelOne);
+        startLevel(currentLevel);
     });
 
-    const level2Button = document.getElementById("level2");
-    level2Button.addEventListener("click", function () {
+    document.getElementById("level2").addEventListener("click", function () {
         currentLevel = assets.levelTwo;
-        startLevel(assets.levelTwo);
+        startLevel(currentLevel);
+    });
+
+    document.getElementById("level3").addEventListener("click", function () {
+        currentLevel = assets.levelThree;
+        startLevel(currentLevel);
     });
 }
 
