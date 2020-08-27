@@ -35,6 +35,34 @@
             .hidden {
                 display: none !important;
             }
+
+            #deathscreen {
+                width: 800px;
+                height: 400px;
+                position: absolute;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            .dths-item {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            .dths-button {
+                font-size: 24px;
+                padding: 8px 16px;
+                border-radius: 3px;
+                border: none;
+                box-shadow: 0 0 3px 1px;
+            }
+            .dths-button:hover, .dths-button:focus {
+                box-shadow: 0 0 6px 2px;
+            }
+            .dths-button:active {
+                box-shadow: inset 0 0 4px 1px;
+            }
         </style>
     </head>
     <body>
@@ -48,6 +76,14 @@
             </div>
             <div class="menu-item">
                 <button id="quit-button" class="menu-button">Quit</button>
+            </div>
+        </div>
+        <div id="deathscreen">
+            <div class="dths-item">
+                <button id="restart-button" class="dths-button">Restart</button>
+            </div>
+            <div class="dths-item">
+                <button id="back-button" class="dths-button">Back</button>
             </div>
         </div>
     </main>

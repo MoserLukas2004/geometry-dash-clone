@@ -7,6 +7,7 @@ let camera = {
 let img;
 let state = "menu";
 let assets = {
+    backgroundImg: null,
     blockImg: null,
     playerImg: null,
     goalImg: null,
@@ -26,11 +27,14 @@ function setup() {
     imageMode(CENTER);
     angleMode(DEGREES);
 
-    //loadLevel(assets.levelOne);
-
     const startButton = document.getElementById("start-button");
-
     startButton.addEventListener("click", startGame);
+
+    const restartButton = document.getElementById("restart-button");
+    restartButton.addEventListener("click", startGame);
+
+    const backButton = document.getElementById("back-button");
+    backButton.addEventListener("click", startMenu);
 }
 
 function startGame() {
@@ -39,6 +43,9 @@ function startGame() {
 
     const menu = document.getElementById("menu");
     menu.classList.add("hidden");
+
+    const deathscreen = document.getElementById("deathscreen");
+    deathscreen.classList.add("hidden");
 }
 
 function startMenu() {
@@ -47,6 +54,20 @@ function startMenu() {
 
     const menu = document.getElementById("menu");
     menu.classList.remove("hidden");
+
+    const deathscreen = document.getElementById("deathscreen");
+    deathscreen.classList.add("hidden");
+}
+
+function startDeathscreen() {
+    entities = [];
+    state = "deathscreen";
+
+    const menu = document.getElementById("menu");
+    menu.classList.add("hidden");
+
+    const deathscreen = document.getElementById("deathscreen");
+    deathscreen.classList.remove("hidden");
 }
 
 function update() {
@@ -65,10 +86,12 @@ function update() {
             checkJump(entities[i]);
             checkPlayerRotate(entities[i]);
             handleSpike(entities[i]);
-            checkCollisionRight(entities[i]);
+            checkGameOverCollision(entities[i]);
             checkGoal(entities[i]);
         }
     } else if (state === "gameover") {
+        startDeathscreen();
+    } else if (state === "menu") {
         startMenu();
     }
 }

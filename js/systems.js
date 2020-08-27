@@ -162,7 +162,7 @@ function checkGoal(entity) {
     if(entity.player) {
         for(let i = 0; i < entities.length; i++) {
             if(entity.id !== entities[i].id && entities[i].goal && doEntitiesCollide(entity, entities[i])) {
-                state = "gameover";
+                state = "menu";
                 break;
             }
         }
@@ -180,7 +180,7 @@ function handleSpike(entity) {
     }
 }
 
-function checkCollisionRight(entity) {
+function checkGameOverCollision(entity) {
     if(entity.player) {
         const newPos = {
             x: entity.position.x + 1,
@@ -191,8 +191,9 @@ function checkCollisionRight(entity) {
             size: entity.size
         }
         for(let i = 0; i < entities.length; i++) {
-            if(entity.id !== entities[i].id && doEntitiesCollide(tmpEntity, entities[i])) {
+            if(!entities[i].goal && entity.id !== entities[i].id && doEntitiesCollide(tmpEntity, entities[i])) {
                 state = "gameover";
+                break;
             }
         }
     }
