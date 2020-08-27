@@ -1,67 +1,73 @@
 // Moves the given entity (Player, etc.) that,
 // has a position and a velocity.
 function moveEntity(entity) {
-    if (entity.position && entity.velocity && entity.solid) {
-        const velRem = {
-            x: entity.velocity.x % 1.0,
-            y: entity.velocity.y % 1.0
-        }
-        const velSign = {
-            x: Math.sign(entity.velocity.x),
-            y: Math.sign(entity.velocity.y),
-        }
-        function doesEntityCollide(targetEntity) {
-            return entities.some(function (otherEntity) {
-                return (
-                    otherEntity.solid &&
-                    entity.id !== otherEntity.id &&
-                    doEntitiesCollide(targetEntity, otherEntity)
-                );
-            });
-        }
-        ["x", "y"].forEach(function (axis) {
-            let inCollision = false;
-            const pixels = Math.floor(Math.abs(entity.velocity[axis]));
-            for (let i = 0; i < pixels; i++) {
-                const newPos = {
-                    x: entity.position.x,
-                    y: entity.position.y,
-                }
-                newPos[axis] += velSign[axis];
-                const tmpEntity = {
-                    position: newPos,
-                    size: entity.size,
-                }
-                if(doesEntityCollide(tmpEntity)) {
-                    inCollision = true;
-                    break;
-                } else {
-                    entity.position[axis] = newPos[axis]
-                }
+    if (entity.position && entity.velocity) {
+        const velocity = {
+            x: entity.velocity.x * dt,
+            y: entity.velocity.y * dt,
+        };
+        if(entity.solid) {
+            const velRem = {
+                x: velocity.x % 1.0,
+                y: velocity.y % 1.0
             }
-            if(!inCollision && velRem[axis] !== 0.0) {
-                const newPos = {
-                    x: entity.position.x,
-                    y: entity.position.y,
-                }
-                newPos[axis] += velRem[axis];
-                const tmpEntity = {
-                    position: newPos,
-                    size: entity.size,
-                }
-                if(doesEntityCollide(tmpEntity)) {
-                    inCollision = true;
-                } else {
-                    entity.position[axis] = newPos[axis]
-                }
+            const velSign = {
+                x: Math.sign(velocity.x),
+                y: Math.sign(velocity.y),
             }
-            if(inCollision) {
-                entity.velocity[axis] = 0.0
+            function doesEntityCollide(targetEntity) {
+                return entities.some(function (otherEntity) {
+                    return (
+                        otherEntity.solid &&
+                        entity.id !== otherEntity.id &&
+                        doEntitiesCollide(targetEntity, otherEntity)
+                    );
+                });
             }
-        })
-    } else if (entity.position && entity.velocity) {
-        entity.position.x += entity.velocity.x;
-        entity.position.y += entity.velocity.y;
+            ["x", "y"].forEach(function (axis) {
+                let inCollision = false;
+                const pixels = Math.floor(Math.abs(velocity[axis]));
+                for (let i = 0; i < pixels; i++) {
+                    const newPos = {
+                        x: entity.position.x,
+                        y: entity.position.y,
+                    }
+                    newPos[axis] += velSign[axis];
+                    const tmpEntity = {
+                        position: newPos,
+                        size: entity.size,
+                    }
+                    if(doesEntityCollide(tmpEntity)) {
+                        inCollision = true;
+                        break;
+                    } else {
+                        entity.position[axis] = newPos[axis]
+                    }
+                }
+                if(!inCollision && velRem[axis] !== 0.0) {
+                    const newPos = {
+                        x: entity.position.x,
+                        y: entity.position.y,
+                    }
+                    newPos[axis] += velRem[axis];
+                    const tmpEntity = {
+                        position: newPos,
+                        size: entity.size,
+                    }
+                    if(doesEntityCollide(tmpEntity)) {
+                        inCollision = true;
+                    } else {
+                        entity.position[axis] = newPos[axis]
+                    }
+                }
+                if(inCollision) {
+                    entity.velocity[axis] = 0.0
+                }
+            })
+        } else {
+            entity.position.x += velocity.x;
+            entity.position.y += velocity.y;
+        }
     }
 }
 
@@ -101,7 +107,7 @@ function drawEntities() {
 // Simulates gravity.
 function applyGravity(entity) {
     if (entity.gravity && entity.velocity) {
-        entity.velocity.y += entity.gravity;
+        entity.velocity.y += entity.gravity * dt;
     }
 }
 
@@ -151,7 +157,7 @@ function checkPlayerRotate(entity) {
             }
         }
         if(shouldRotate) {
-            entity.rotate += JUMP_ROTATE_STEP;
+            entity.rotate += JUMP_ROTATE_STEP * dt;
         } else {
             entity.rotate = round(entity.rotate / 90.0) * 90.0;
         }

@@ -14,6 +14,7 @@ let assets = {
     levelOne: null,
     levelTwo: null
 };
+let dt = 1.0;
 
 function preload() {
     assets.blockImg = loadImage('images/Block.png');
@@ -28,12 +29,15 @@ function setup() {
     rectMode(CENTER);
     imageMode(CENTER);
     angleMode(DEGREES);
+    frameRate(FPS);
 
     setupStates();
     startMainMenu();
 }
 
 function update() {
+    dt = deltaTime / (1000.0 / 60.0);
+
     if(state === "running") {
         if(player) {
             player.update();
