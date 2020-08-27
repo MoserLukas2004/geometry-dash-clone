@@ -162,7 +162,7 @@ function checkGoal(entity) {
     if(entity.player) {
         for(let i = 0; i < entities.length; i++) {
             if(entity.id !== entities[i].id && entities[i].goal && doEntitiesCollide(entity, entities[i])) {
-                state = "menu";
+                nextState = "mainMenu";
                 break;
             }
         }
@@ -173,7 +173,7 @@ function handleSpike(entity) {
     if(entity.player){
         for(let i = 0; i < entities.length; i++) {
             if(entity.id !== entities[i].id && entities[i].enemy && doEntitiesCollide(entity, entities[i])) {
-                state = "gameover";
+                nextState = "gameover";
                 break;
             }
         }
@@ -192,7 +192,7 @@ function checkGameOverCollision(entity) {
         }
         for(let i = 0; i < entities.length; i++) {
             if(!entities[i].goal && entity.id !== entities[i].id && doEntitiesCollide(tmpEntity, entities[i])) {
-                state = "gameover";
+                nextState = "gameover";
                 break;
             }
         }

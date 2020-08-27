@@ -5,7 +5,7 @@
         <title>Geometry Dash clone</title>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5"></script>
         <style>
-            #menu {
+            .menu {
                 width: 800px;
                 height: 400px;
                 position: absolute;
@@ -36,38 +36,11 @@
                 display: none !important;
             }
 
-            #deathscreen {
-                width: 800px;
-                height: 400px;
-                position: absolute;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-            }
-            .dths-item {
-                display: block;
-                width: 100%;
-                text-align: center;
-            }
-            .dths-button {
-                font-size: 24px;
-                padding: 8px 16px;
-                border-radius: 3px;
-                border: none;
-                box-shadow: 0 0 3px 1px;
-            }
-            .dths-button:hover, .dths-button:focus {
-                box-shadow: 0 0 6px 2px;
-            }
-            .dths-button:active {
-                box-shadow: inset 0 0 4px 1px;
-            }
         </style>
     </head>
     <body>
     <main>
-        <div id="menu">
+        <div id="mainMenu" class="menu">
             <div class="menu-item">
 
             </div>
@@ -78,17 +51,32 @@
                 <button id="quit-button" class="menu-button">Quit</button>
             </div>
         </div>
-        <div id="deathscreen">
-            <div class="dths-item">
-                <button id="restart-button" class="dths-button">Restart</button>
+        <div id="gameover" class="menu">
+            <div class="menu-item">
+                <button id="restart-button" class="menu-button">Restart</button>
             </div>
-            <div class="dths-item">
-                <button id="back-button" class="dths-button">Back</button>
+            <div class="menu-item">
+                <button id="back-button" class="menu-button">Back</button>
+            </div>
+        </div>
+        <div id="levelSelector" class="menu">
+            <div class="menu-item">
+                <button id="level1" class="menu-button">1</button>
+            </div>
+            <div class="menu-item">
+                <button id="level2" class="menu-button">2</button>
+            </div>
+            <div class="menu-item">
+                <button id="level3" class="menu-button">3</button>
+            </div>
+            <div class="menu-item">
+                <button id="back-button" class="menu-button">Back</button>
             </div>
         </div>
     </main>
 
         <script type="text/javascript" src="./js/settings.js"></script>
+        <script type="text/javascript" src="./js/states.js"></script>
         <script type="text/javascript" src="./js/entities/player.js"></script>
         <script type="text/javascript" src="./js/entities/block.js"></script>
         <script type="text/javascript" src="./js/entities/spike.js"></script>

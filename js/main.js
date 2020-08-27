@@ -4,14 +4,15 @@ let camera = {
     x: 0,
     y: 0
 };
-let img;
-let state = "menu";
+let state;
+let nextState = null;
 let assets = {
     backgroundImg: null,
     blockImg: null,
     playerImg: null,
     goalImg: null,
-    levelOne: null
+    levelOne: null,
+    levelTwo: null
 };
 
 function preload() {
@@ -19,6 +20,7 @@ function preload() {
     assets.playerImg = loadImage('images/Player.png');
     assets.goalImg = loadImage('images/Goal.png');    
     assets.levelOne = loadStrings('level/level1.txt');
+    assets.levelTwo = loadStrings('level/level2.txt');
 }
 
 function setup() {
@@ -27,47 +29,8 @@ function setup() {
     imageMode(CENTER);
     angleMode(DEGREES);
 
-    const startButton = document.getElementById("start-button");
-    startButton.addEventListener("click", startGame);
-
-    const restartButton = document.getElementById("restart-button");
-    restartButton.addEventListener("click", startGame);
-
-    const backButton = document.getElementById("back-button");
-    backButton.addEventListener("click", startMenu);
-}
-
-function startGame() {
-    loadLevel(assets.levelOne);
-    state = "running";
-
-    const menu = document.getElementById("menu");
-    menu.classList.add("hidden");
-
-    const deathscreen = document.getElementById("deathscreen");
-    deathscreen.classList.add("hidden");
-}
-
-function startMenu() {
-    entities = [];
-    state = "menu";
-
-    const menu = document.getElementById("menu");
-    menu.classList.remove("hidden");
-
-    const deathscreen = document.getElementById("deathscreen");
-    deathscreen.classList.add("hidden");
-}
-
-function startDeathscreen() {
-    entities = [];
-    state = "deathscreen";
-
-    const menu = document.getElementById("menu");
-    menu.classList.add("hidden");
-
-    const deathscreen = document.getElementById("deathscreen");
-    deathscreen.classList.remove("hidden");
+    setupStates();
+    startMainMenu();
 }
 
 function update() {
@@ -87,12 +50,9 @@ function update() {
             checkPlayerRotate(entities[i]);
             handleSpike(entities[i]);
             checkGameOverCollision(entities[i]);
-            checkGoal(entities[i]);
+            checkGoal(entities[i]); 
         }
-    } else if (state === "gameover") {
-        startDeathscreen();
-    } else if (state === "menu") {
-        startMenu();
+        maybeSwitchState();
     }
 }
 
