@@ -11,20 +11,23 @@ let assets = {
     blockImg: null,
     playerImg: null,
     goalImg: null,
-    levelOne: null,
-    levelTwo: null,
-    levelThree: null
+    // This is now an object where keys are the level's file name,
+    // and values are the loaded level strings.
+    levels: {},
 };
 let dt = 1.0;
 
 function preload() {
     assets.blockImg = loadImage('images/Block.png');
     assets.playerImg = loadImage('images/Player.png');
-    assets.goalImg = loadImage('images/Goal.png');    
-    assets.levelOne = loadStrings('level/level1.txt'); 
-    assets.levelTwo = loadStrings('level/level2.txt');
-    assets.levelThree = loadStrings('level/level3.txt');
+    assets.goalImg = loadImage('images/Goal.png');
 
+    const levelNames = ["level1.txt", "level2.txt", "level3.txt"];
+    for (let i = 0; i < levelNames.length; i++) {
+        const levelName = levelNames[i];
+        const levelFile = "level/" + levelName;
+        assets.levels[levelName] = loadStrings(levelFile);
+    }
 }
 
 function setup() {

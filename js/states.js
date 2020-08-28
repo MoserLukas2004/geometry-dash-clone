@@ -15,20 +15,26 @@ function setupStates() {
 
     document.querySelector("#levelSelector .back-button").addEventListener("click", startMainMenu);
 
-    document.getElementById("level1").addEventListener("click", function () {
-        currentLevel = assets.levelOne;
-        startLevel(currentLevel);
-    });
+    // For every level select button (buttons with class `level-button`)
+    // add an event listener for starting its level.
+    // Each button knows which level it should start by its `data-level` HTML attribute.
+    const levelButtons = document.getElementsByClassName("level-button");
+    for (let i = 0; i < levelButtons.length; i++) {
+        const levelButton = levelButtons[i];
+        const levelName = levelButton.getAttribute("data-level");
 
-    document.getElementById("level2").addEventListener("click", function () {
-        currentLevel = assets.levelTwo;
-        startLevel(currentLevel);
-    });
+        if (!levelName) {
+            throw new Error("Level select button needs a \"data-level\" attribute.");
+        }
+        if (!assets.levels[levelName]) {
+            throw new Error("Level not loaded: " + levelName);
+        }
 
-    document.getElementById("level3").addEventListener("click", function () {
-        currentLevel = assets.levelThree;
-        startLevel(currentLevel);
-    });
+        levelButton.addEventListener("click", function () {
+            currentLevel = assets.levels[levelName];
+            startLevel(currentLevel);
+        });
+    }
 }
 
 function startMainMenu() {
