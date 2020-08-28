@@ -204,3 +204,11 @@ function checkGameOverCollision(entity) {
         }
     }
 }
+
+function checkFallInfinite(entity) {
+    if(entity.player) {
+        if(player.position.y > SCREEN_SIZE.height * 4) {
+            nextState = "gameover";
+        }
+    }
+}

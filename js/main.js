@@ -57,7 +57,8 @@ function update() {
             checkPlayerRotate(entities[i]);
             handleSpike(entities[i]);
             checkGameOverCollision(entities[i]);
-            checkGoal(entities[i]); 
+            checkFallInfinite(entities[i]); 
+            checkGoal(entities[i]);
         }
         maybeSwitchState();
     }
