@@ -2,14 +2,38 @@
     display: none !important;
 }
 
-.menu {
+.overlay {
+    position: absolute;
     width: 800px;
     height: 400px;
-    position: absolute;
+}
+
+.panes {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+}
+
+.menu {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+
+.menu-inline {
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .menu-item {
@@ -17,6 +41,27 @@
     position: relative;
     text-align: center;
     z-index: 1;
+}
+
+.menu-button {
+    font-size: 24px;
+    text-align: center;
+    padding: 8px 16px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 0 3px 1px;
+    z-index: 1;
+    cursor: pointer;
+    transition: box-shadow 0.1s;
+}
+
+.menu-button:hover,
+.menu-button:focus {
+    box-shadow: 0 0 6px 2px;
+}
+
+.menu-button:active {
+    box-shadow: inset 0 0 4px 1px;
 }
 
 .menu-button-highlight::before {
@@ -52,21 +97,16 @@
     opacity: 0.75;
 }
 
-.menu-button {
-    font-size: 24px;
-    padding: 8px 16px;
-    border-radius: 3px;
-    border: none;
-    box-shadow: 0 0 3px 1px;
-    z-index: 1;
-    transition: box-shadow 0.1s;
+.character-button {
+    padding: 0;
 }
 
-.menu-button:hover,
-.menu-button:focus {
-    box-shadow: 0 0 6px 2px;
+.back-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.menu-button:active {
-    box-shadow: inset 0 0 4px 1px;
+#levelAndCharacterSelectors {
+    height: 80%;
 }

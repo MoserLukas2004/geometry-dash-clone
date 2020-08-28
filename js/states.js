@@ -12,8 +12,7 @@ function setupStates() {
     });
 
     document.querySelector("#gameover .back-button").addEventListener("click", startLevelSelector);
-
-    document.querySelector("#levelSelector .back-button").addEventListener("click", startMainMenu);
+    document.querySelector("#levelAndCharacterSelectors .back-button").addEventListener("click", startMainMenu);
 
     // For every level select button (buttons with class `level-button`)
     // add an event listener for starting its level.
@@ -62,17 +61,19 @@ function startLevelSelector() {
     hideAllMenus();
 
     document.getElementById("levelSelector").classList.remove("hidden");
+    document.getElementById("characterSelector").classList.remove("hidden");
+    document.getElementById("levelAndCharacterSelectors").classList.remove("hidden");
 }
 
 function startLevel(level) {
-    loadLevel(level);    
+    loadLevel(level);
     state = "running";
 
     hideAllMenus();
 }
 
 function hideAllMenus() {
-    const menus = document.getElementsByClassName("menu");
+    const menus = document.getElementsByClassName("screen");
     for(let i = 0; i < menus.length; i++) {
         menus[i].classList.add("hidden");
     }
@@ -91,7 +92,6 @@ function maybeSwitchState() {
             case "levelSelector":
                 startLevelSelector();
                 break;
-                
         }
         nextState = null;
     }
